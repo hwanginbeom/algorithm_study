@@ -4,6 +4,8 @@ def solution1(answers):
     first = [1, 2, 3, 4, 5]
     second = [2, 1, 2, 3, 2, 4, 2, 5]
     third = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+
+    # 맞힌 문제 개수를 저장할 리스트 생성
     cnt = [0] * 3
 
     answer = []
