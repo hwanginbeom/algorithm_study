@@ -77,7 +77,7 @@ print(solution2(n, lost, reserve))
 
 
 # 3
-# 38분 (효율성 x)
+# 25분 (효율성 x)
 def solution3(prices):
     answer = []
     cnt = 0
