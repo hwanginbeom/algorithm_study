@@ -32,4 +32,3 @@ dfs(graph, 1, visited)
 
 # 0번 인덱스는 쓰이지 않으므로 1을 뺀다.
 print(visited.count(True) - 1)
-
