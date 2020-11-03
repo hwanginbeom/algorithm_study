@@ -64,4 +64,26 @@ print(solution2(5, [2,4], [1,3,5]))
 
 
 
-##### 3번문제
+
+############################################ 3번문제 #########################################
+
+
+def solution3(prices):
+    answer = []
+    
+    for i in range(0, len(prices)):
+        count = 0
+        
+        for j in range(i+1, len(prices)):
+            count += 1
+            
+            if prices[i] <= prices[j]:
+                continue
+            else:
+                break
+        answer.append(count)
+        
+    return answer
+
+
+solution3([1,2,3,2,1])
