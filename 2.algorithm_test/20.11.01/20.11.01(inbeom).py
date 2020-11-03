@@ -1,4 +1,6 @@
-#40분
+
+# 1번 문제 - 모의고사(완전탐색) 
+# 40분
 def solution(answers):
     one = [1, 2, 3, 4, 5]
     two = [2, 1, 2, 3, 2, 4, 2, 5]
@@ -41,3 +43,39 @@ def solution(answers):
 
 answer= [1,3,2,4,2]
 solution(answer)
+
+
+# 2번 문제 - 체육복 (탐욕법(greedy))
+def solution2(n, lost, reserve):
+    del_value= list(set(lost).intersection(reserve))
+
+    for i in del_value:
+        lost.remove(i)
+        reserve.remove(i)
+    for i in reserve:
+        f = i - 1
+        b = i + 1
+        if f in lost:
+            lost.remove(f)
+        elif b in lost:
+            lost.remove(b)
+    n = n - len(lost)
+    answer = n
+    print(answer)
+    return answer
+
+
+# 3번 문제 - 주식시장(스택 / 큐)
+
+def solution3(prices):
+    answer = []
+    for i in range(0, len(prices)):
+        count = 0
+        for j in range(i+1, len(prices)):
+            count += 1
+            if prices[i] <= prices[j]:
+                continue
+            else:
+                break
+        answer.append(count)
+    return answer
