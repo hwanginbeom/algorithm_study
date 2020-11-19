@@ -57,7 +57,8 @@ def solution1() :
             print(distance[i])
 
 
-# solution1()
+
+solution1()
 
 
 
