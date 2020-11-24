@@ -1,43 +1,38 @@
-# 특정 원소가 속한 집합을 찾기
-def find_parent(parent, x):
-    # 루트 노드를 찾을 떄까지 재귀 호출
+# Root node를 찾아주는 함수
+def find(x):
     if parent[x] != x:
-        return find_parent(parent, parent[x])
-    return x
+        parent[x] = find(parent, parent[x])
+    return parent[x]
 
 
-# 두 원소가 속한 집합을 합치기
-def union_parent(parent, a, b):
-    a = find_parent(parent, a)
+# y의 Root 노드가 x의 Root 노드와 같지 않으면
+# y의 Root 노드가 x의 Root 노드의 자식이 되도록 하는 함수
+def union(x, y):
+    root_x = find(x)
+    root_y = find(y)
+
+    if root_x != root_y:
+        parent[root_y] = root_x
+        number[root_x] += number[root_y]
 
 
-    b = find_parent(parent, b)
-    if a < b:
-        parent[b] = a
-    else:
-        parent[a] = b
+test_cases = int(input())
 
-# 노드의 개수와 간선의 개수 입력받기
-v, e = map(int, input().split())
-parent = [0] * (v + 1)  # 부모 테이블 초기화 하기
+for _ in range(test_cases):
+    parent = dict()
+    number = dict()
 
-# 부모 테이블상에서, 부모를 자기 자신으로 초기화
-for i in range(1, v + 1):
-    parent[i] = i
+    f = int(input())
 
-cycle = False  # 사이클 발생여부
+    for _ in range(f):
+        x, y = input().split(" ")
 
-for i in range(1, v + 1):
-    a, b = map(int, input().split())
-    # 사이클이 발생한 경우 종료
-    if find_parent(parent, a) == find_parent(parent, b):
-        cycle = True
-        break
-        # 사이클이 발생하지 않았다면 합집합 연산 수행
-    else:
-        union_parent(parent, a, b)
+        if x not in parent:
+            parent[x] = x
+            number[x] = 1
+        if y not in parent:
+            parent[y] = y
+            number[y] = 1
 
-if cycle:
-    print("사이클이 발생했습니다.")
-else:
-    print("사이클이 발생하지 않았습니다.")
+        union(x, y)
+        print(number[find(x)])
