@@ -1,4 +1,7 @@
 # 1. 구간 합 구하기 4
+import sys
+
+
 def solution1() :
     n, m = map(int, input().split())
     array = list(map(int, input().split()))
@@ -11,11 +14,11 @@ def solution1() :
         intervalSum.append(valueSum)
 
     for _ in range(m) :
-        i, j = map(int, input().split())
+        i, j = map(int, sys.stdin.readline().split())
         print(intervalSum[j] - intervalSum[i - 1])
 
 
-# solution1()
+solution1()
 
 
 
@@ -54,4 +57,4 @@ def solution2() :
         print(valueSum)
 
 
-solution2()
+# solution2()
