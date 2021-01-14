@@ -23,8 +23,6 @@ for _ in range(n):
 # 방법 1
 array.sort()
 
-rank=[i for i in range(1,n+1)]
-
 predict=[]
 for i in range(len(array)):
     predict.append(abs(array[i]-(i+1)))
