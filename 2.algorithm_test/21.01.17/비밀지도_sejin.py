@@ -1,8 +1,6 @@
-n = 6
-arr1 =[46,33,33,22,31,50]
-arr2 =[27,56,19,14,14,10]
+# https://programmers.co.kr/learn/courses/30/lessons/17681
 
-def change(x) :
+def change(n, x) :
     y = ""
     while x > 0 :
         div = x // 2
@@ -14,10 +12,10 @@ def change(x) :
 def solution(n, arr1, arr2) :
     a1 = []
     for i in range(len(arr1)) :
-        a1.append(change(arr1[i]))
+        a1.append(change(n, arr1[i]))
     a2 = []
     for i in range(len(arr2)) :
-        a2.append(change(arr2[i]))
+        a2.append(change(n, arr2[i]))
 
     answer = []
     for j in range(n) :
@@ -28,6 +26,23 @@ def solution(n, arr1, arr2) :
             else :
                 result.append("#")
         answer.append(''.join(result))
-    return(answer)
+    return answer
 
-print(solution(n,arr1,arr2))
+print(solution(6, [46,33,33,22,31,50], [27,56,19,14,14,10]))
+
+
+# 경린언니 숏 코딩
+#
+# def solution(n, arr1, arr2) :
+#
+#     change = []
+#     answer = []
+#
+#     for i in range(n) :
+#         # bin(number), format(number, 'b') : 정수를 이진수 문자열로 바꾸는 함수
+#         change.append(bin(arr1[i]|arr2[i])[2:].zfill(n))
+#
+#     for j in range(len(change)):
+#         answer.append(change[j].replace("0"," ").replace("1","#"))
+#
+#     return answer
