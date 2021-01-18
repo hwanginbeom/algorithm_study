@@ -64,40 +64,25 @@ arr2 = [27, 56, 19, 14, 14, 10]
 
 
 # 파일명 정렬
+import re
+
+
+def alpha(file) :
+    n = re.findall('\d+', file)[0]
+    head = file.split(n)[0].lower()
+
+    return head
+
+
+def num(file) :
+    n = re.findall('\d+', file)[0]
+    number = int(n)
+
+    return number
+
+
 def solution2(files):
-    answer = []
-    file_list = []
-
-    for file in files:
-        head = ''
-        number = ''
-
-        for i in range(len(file)):
-            if not file[i].isdigit():
-                head += file[i]
-            else:
-                num_index = i
-                break
-
-        for i in range(num_index, len(file)):
-            if file[i].isdigit():
-                number += file[i]
-            else:
-                tail_index = i
-                break
-
-        tail = file[tail_index:]
-
-        file_list.append([head, number, tail])
-
-    print(file_list)
-
-    file_list = sorted(file_list, key = lambda x : (x[0].lower(), int(x[1])))
-
-    # print(file_list)
-
-    for file in file_list :
-        answer.append(''.join(file))
+    answer = sorted(files, key = lambda x : (alpha(x), num(x)))
 
     return answer
 
