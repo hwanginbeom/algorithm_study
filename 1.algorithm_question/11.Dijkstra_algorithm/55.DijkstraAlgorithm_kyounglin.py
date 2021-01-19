@@ -12,41 +12,51 @@
 # 이 때 1번 도시에서 출발하여 도달할 수 있는 도시 중에서, 최단 거리가 2인 도시는 4번 도시 뿐이다.
 # 2번과 3번 도시의 경우, 최단 거리가 1이기 때문에 출력하지 않는다.
 
+import heapq
 import sys
-from collections import deque
+INF=int(1e9)
+input = sys.stdin.readline
 
-def Dijkstra(N, K, X, graph):
-    visit = [False] * (N + 1)
-    dq = deque()
-    dq.append((X, 0))
-    visit[X] = 0
+# 도시의 수 거리의 수 거리의 정보 출발 도시 번호 입력
 
-    while dq:
-        vertex, weight = dq.popleft()
-        for v in graph[vertex]:
-            if visit[v] is False:
-                visit[v] = weight + 1
-                dq.append((v, weight + 1))
+n,m,k,x=map(int,input().split())
 
-    ret = []
-    for i in range(len(visit)):
-        if visit[i] == K:
-            ret.append(i)
+# 도시와 거리 연결
+graph=[[] for _ in range(n+1)]
+# 최단 거리 모두 초기화
+distance=[INF]*(n+1)
 
-    if not ret:
-        print(-1)
-        return
-    ret.sort()
-    for i in ret:
-        print(i)
+# 모든 거리 정보 입력받기
+for _ in range(m):
+    a,b=map(int,input().split())
+    graph[a].append((b,1))
 
-def solution():
-    N, M, K, X = map(int, sys.stdin.readline().split())
-    graph = [[] for _ in range(N+1)]
-    for _ in range(M):
-        A, B = map(int, sys.stdin.readline().split())
-        graph[A].append(B)
 
-    Dijkstra(N, K, X, graph)
+def dijkstra(x):
+    q=[]
+    heapq.heappush(q,(0,x))
+    distance[x]=0
+    while q: # 큐가 비어있지 않을 때까지
+        dist,now =heapq.heappop(q) # 가장 최단 거리가 짧은 노드에 대한 정보 꺼내기
+        if distance[now]<dist: # 이미 처리된 노드 무시하기
+            continue
+        # 인접한 노드 확인
+        for i in graph[now]:
+            cost = dist + i[1]
 
-solution()
+            if cost<distance[i[0]]:
+                distance[i[0]]=cost
+                heapq.heappush(q,(cost,i[0]))
+
+
+dijkstra(x)
+
+if k in distance:
+    for i in range(len(distance)):
+        if distance[i]==k:
+            print(i)
+
+else:
+    print(-1)
+
+
