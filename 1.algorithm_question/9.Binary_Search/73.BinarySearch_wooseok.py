@@ -5,6 +5,7 @@ def binary_search(_list, target) :
     start = 1
     end = _list[-1]
 
+    # 이분탐색
     while start <= end :
         _sum = 0
         mid = (start + end) // 2
@@ -33,10 +34,7 @@ def solution() :
 
     deposit_list.sort()
 
-    if sum(deposit_list) <= upper_limit :
-        print(deposit_list[-1])
-    else :
-        print(binary_search(deposit_list, upper_limit))
+    print(binary_search(deposit_list, upper_limit))
 
 
 solution()
