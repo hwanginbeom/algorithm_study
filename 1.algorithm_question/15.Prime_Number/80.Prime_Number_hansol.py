@@ -4,34 +4,32 @@
 
 import math
 
-# 소수 판별 함수를 정의 (강의 참고)
+# 소수 판별 함수 정의
 def is_prime_number(x):
-    if x==1:
-        return False
-    elif (2 <= x) and (x <= 100000) :
-        for i in range(2,int(math.sqrt(x))+1):
+    # 100000보다 작아야하는 조건 추가
+    if x < 100000:
+        for i in range(2, int(math.sqrt(x)) + 1):
             if x % i == 0:
                 return False
         return True
+    return False
 
-
-def answer(array):
-    check=[]
-    for i in range(len(array)):
-        for j in range(i+1,len(array)+1): # 순서에 맞게 문자열 조합 구하기
-            check.append(int(array[i:j]))
-    check=set(check) # 중복제거
-    check=list(check)
-    answer=[]
-    for i in check:
-        if is_prime_number(i):
-            answer.append(i)
-
-    print(max(answer)) # 소수 중 가장 큰 값
-
-while (1):
-    data = str(input())
+# 입력값 받기
+lst = []
+while True:
+    data = input()
+    # 0이 입력되면 멈추기
     if data == '0':
         break
-    else:
-        answer(data)
+    lst.append(data)
+
+for data in lst:
+    # 최댓값을 찾기 위한 타겟 설정
+    target = 0
+    for i in range(len(data)):
+        for j in range(i + 1, len(data) + 1):
+            # [i:j] = [0:1], [0:2], ... , [0:끝값], [1:2], [1:3], ...
+            if is_prime_number(int(data[i:j])):
+                # 최댓값으로 초기화
+                target = max(target, int(data[i:j]))
+    print(target)
