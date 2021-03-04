@@ -4,17 +4,22 @@ data.sort()
 x = int(input())
 
 count = 0
-start = 0
 end = len(data)-1
 
-while start < end :
-    two_sum = data[start] + data[end]
-    if two_sum == x :
-        count += 1
-    elif two_sum < x :
-        start += 1
-        continue
-    end -= 1
+for start in range(len(data)) :
+    two_sum = data[start]
+
+    while start < end :
+        two_sum += data[end]
+
+        if two_sum == x :
+            count += 1
+            break
+        elif two_sum > x :
+            two_sum -= data[end]
+            end -= 1
+        else :
+            break
 print(count)
 
 
