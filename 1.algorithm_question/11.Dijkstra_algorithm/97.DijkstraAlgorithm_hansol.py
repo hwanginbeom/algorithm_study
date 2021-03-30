@@ -35,18 +35,22 @@ def dijkstra(start):
                 distance[i[0]] = cost
                 heapq.heappush(q, (cost, i[0]))
 
+# x에서 각 노드까지의 최단거리 저장하기 위해 다익스트라 알고리즘 수행
 dijkstra(x)
+# x에서 각 노드까지의 최단거리 저장
 x_distance = distance.copy()
 
-time_list = []
-
+cost_sum = 0
+# X로 갔다가 X에서 자기 자신으로 돌아오는 모든 비용을 확인
 for i in range(1, n + 1) :
+    # 자기 자신일 경우 무시
     if i == x :
         continue
+    # x에서 다른 노드까지의 거리를 계산하기 위해 활용한 distance 초기화
     distance = [INF] * (n + 1)
-    s = 0
+    # 다익스트라 알고리즘 수행
     dijkstra(i)
-    s += distance[x] + x_distance[i]
-    time_list.append(s)
+    # i에서 x로 비용 + x에서 i로 비용 값 중 최댓값을 찾기
+    cost_sum = max(cost_sum, (distance[x] + x_distance[i]))
 
-print(max(time_list))
+print(cost_sum)
