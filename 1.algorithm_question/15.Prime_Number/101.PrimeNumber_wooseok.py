@@ -28,14 +28,14 @@ def solution() :
         left = center - 1
         right = center + 1
         while True :
+            if left == 1 :
+                break
+
             if _list[left] and _list[right] :
                 count += 1
 
             left -= 1
             right += 1
-
-            if left == 1 :
-                break
 
         answer.append(count)
 
