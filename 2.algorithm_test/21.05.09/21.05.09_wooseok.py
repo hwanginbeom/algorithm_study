@@ -41,11 +41,11 @@ def solution(m, n, board):
         # 터지는 블록 개수 및 인덱스 찾기
         for i in range(m - 1):
             for j in range(n - 1):
-                if graph[i][i] != '':
+                if graph[i][j] != '':
                     temp = search(dx, dy, i, j, graph)
 
-                if temp:
-                    result.extend(temp)
+                    if temp:
+                        result.extend(temp)
 
         if not result:
             break
@@ -59,6 +59,8 @@ def solution(m, n, board):
 
         # 블록 떨어지는 로직
         queue = deque([])
+
+        # 왼쪽 아래에서부터 한 세로줄씩 접근
         for i in range(n):
             for j in range(m - 1, -1, -1):
                 if graph[j][i] == '':
@@ -72,6 +74,8 @@ def solution(m, n, board):
                         queue.append((j, i))
 
             queue.clear()
+
+        # print(graph)
 
     return answer
 
