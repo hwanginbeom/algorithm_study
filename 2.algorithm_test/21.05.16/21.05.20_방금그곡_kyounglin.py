@@ -28,8 +28,7 @@ def solution(m, musicinfos):
         time2 = list(map(int, check[i][1].split(':')))
         time = (time2[0] * 60 + time2[1]) - (time1[0] * 60 + time1[1])
         # #치환
-        melody = check[i][3].replace('C#', 'c').replace('D#', 'd').replace('F#', 'f').replace('A#', 'a').replace('G#',
-                                                                                                                 'g')
+        melody = check[i][3].replace('C#', 'c').replace('D#', 'd').replace('F#', 'f').replace('A#', 'a').replace('G#','g')
         if len(melody) <= time:
             idx = 1
             count = 0
