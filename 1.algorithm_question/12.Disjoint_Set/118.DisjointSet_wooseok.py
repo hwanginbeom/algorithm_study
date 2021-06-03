@@ -1,5 +1,5 @@
-# 중량제한
-# https://www.acmicpc.net/problem/1939
+# 거짓말
+# https://www.acmicpc.net/problem/1043
 
 
 def solution() :
