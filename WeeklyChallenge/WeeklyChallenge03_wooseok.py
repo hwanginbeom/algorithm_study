@@ -4,28 +4,30 @@ import copy
 
 
 def dfs(graph, x, y, position, n, num):
-    dic = {0: [-1, 0], 1: [0, 1], 2: [1, 0], 3: [0, -1]}
+    dx = [-1, 0, 1, 0]
+    dy = [0, 1, 0, -1]
+
     ret = [position]
 
     for i in range(4):
-        nx = x + dic[i][0]
-        ny = y + dic[i][1]
+        nx = x + dx[i]
+        ny = y + dy[i]
 
         if 0 <= nx < n and 0 <= ny < n and graph[nx][ny] == num:
             graph[nx][ny] = 2
-            ret = ret + dfs(graph, nx, ny, [position[0] + dic[i][0], position[1] + dic[i][1]], n, num)
+            ret = ret + dfs(graph, nx, ny, [position[0] + dx[i], position[1] + dy[i]], n, num)
 
     return ret
 
 
-def rotate(lst):
-    n = len(lst)
+def rotate(graph):
+    n = len(graph)
 
     ret = [[0] * n for _ in range(n)]
 
     for i in range(n):
         for j in range(n):
-            ret[j][n - 1 - i] = lst[i][j]
+            ret[j][n - 1 - i] = graph[i][j]
 
     return ret
 
@@ -53,10 +55,10 @@ def solution(game_board, table):
                 if table_rotate_copy[i][j] == 1:
                     table_rotate_copy[i][j] = 2
                     result = dfs(table_rotate_copy, i, j, [0, 0], n, 1)[1:]
+
                     if result in block:
                         block.pop(block.index(result))
                         answer += (len(result) + 1)
-
                         table = copy.deepcopy(table_rotate_copy)
                     else:
                         table_rotate_copy = copy.deepcopy(table)
