@@ -1,3 +1,5 @@
+# 수식 최대화
+# https://programmers.co.kr/learn/courses/30/lessons/67257
 import re, copy
 from itertools import permutations
 from collections import deque
